@@ -48,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         Log.i(TAG, "Attempting to login user " + username);
 
         //LoginInBackground runs in background thread to allow user to still do stuff
+
+
+
         ParseUser.logInInBackground(username, password, new LogInCallback() {
 
             @Override
