@@ -27,13 +27,12 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+<img src='https://github.com/reycritt/AndroidParsetagram/blob/master/Part1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+- At this time, there is no sign out feature; to log out, the app must be uninstalled
+- All passwords, except for "charles", should be 1234
 
 ## Open-source libraries used
 
