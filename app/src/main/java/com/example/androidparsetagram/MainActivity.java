@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -13,6 +16,7 @@ import com.example.androidparsetagram.fragments.ComposeFragment;
 import com.example.androidparsetagram.fragments.PostsFragment;
 import com.example.androidparsetagram.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.ParseUser;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -59,5 +63,18 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
+    public void onLogout(MenuItem item) {
+        ParseUser.logOut();
+        Log.d(TAG, "Logging out");
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+        //Ends the current activity
+        finish();
+    }
 }

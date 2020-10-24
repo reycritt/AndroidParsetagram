@@ -1,8 +1,13 @@
 package com.example.androidparsetagram.fragments;
 
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.androidparsetagram.Post;
+import com.example.androidparsetagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -18,8 +23,14 @@ public class ProfileFragment extends PostsFragment{
     private static final String TAG = "ProfileFragment";
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    @Override
     protected void queryPosts() {
-        super.queryPosts();
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);//Will automatically retrieve the key/column
 
