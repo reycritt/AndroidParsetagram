@@ -2,7 +2,7 @@
 
 **Parsetagram** is a photo sharing app similar to Instagram but using Parse as its backend.
 
-Time spent: **3** hours spent in total
+Time spent: **5** hours spent in total
 
 ## User Stories
 
@@ -27,12 +27,12 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/reycritt/AndroidParsetagram/blob/master/Part1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/reycritt/AndroidParsetagram/blob/master/Part1%20Better.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ## Notes
 
-- At this time, there is no sign out feature; to log out, the app must be uninstalled
 - All passwords, except for "charles", should be 1234
+- The GUI/style is still being played with, and will most likely not match to Instagram's
 
 ## Open-source libraries used
 
