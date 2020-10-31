@@ -46,6 +46,7 @@ public class ComposeFragment extends Fragment {
     private Button btnSubmit;
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    private boolean isSaving = false;
 
     //Set up layout file; created when fragment is called to create view object heiarchy
     @Override
@@ -69,34 +70,46 @@ public class ComposeFragment extends Fragment {
         ivPostImage.setImageResource(R.drawable.ic_image_placeholder_foreground);
 
         //queryPosts();
-        btnCaptureImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchCamera();//Implicit intent
-            }
-        });
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String description = etDescription.getText().toString();
-                if (description.isEmpty()) {
-                    //Cannot do "Class.this"; use "getContext()"
-                    Toast.makeText(/*MainActivity.this*/ getContext(),
-                            "Description cannot be emoty", Toast.LENGTH_SHORT).show();
-                    return;
+        //Start if
+        //if (!isSaving) {
+            btnCaptureImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    launchCamera();//Implicit intent
                 }
+            });
 
-                if (!photoFile.exists() || photoFile == null
-                        || ivPostImage.getDrawable() == null) {
-                    Toast.makeText(getContext(),
-                            "There is no image!", Toast.LENGTH_SHORT).show();
-                    return;
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String description = etDescription.getText().toString();
+                    if (description.isEmpty()) {
+                        //Cannot do "Class.this"; use "getContext()"
+                        Toast.makeText(/*MainActivity.this*/ getContext(),
+                                "Description cannot be emoty", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (!photoFile.exists() || photoFile == null
+                            || ivPostImage.getDrawable() == null) {
+                        Toast.makeText(getContext(),
+                                "There is no image!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (!isSaving) {
+                        ParseUser currentUser = ParseUser.getCurrentUser();
+                        isSaving = true;
+                        Log.e(TAG, "isSaving: " + isSaving);
+                        savePost(description, currentUser, photoFile);
+                    } else
+                        Toast.makeText(getContext(), "Please wait until post is posted!", Toast.LENGTH_SHORT).show();
                 }
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, photoFile);
-            }
-        });
+            });
+        //} else {
+        //
+        //}
+        //End if
+
     }
 
     private void launchCamera() {
@@ -153,6 +166,8 @@ public class ComposeFragment extends Fragment {
     }
 
     private void savePost(String description, ParseUser currentUser, File photoFile) {
+        Toast.makeText(getContext(), "Saving post...", Toast.LENGTH_SHORT).show();
+
         Post post = new Post();
         post.setDescription(description);
         post.setUser(currentUser);
@@ -166,8 +181,10 @@ public class ComposeFragment extends Fragment {
                             "Error while saving!", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Post successfully saved!");
+                Toast.makeText(getContext(), "Post successfully saved!", Toast.LENGTH_SHORT).show();
                 etDescription.setText("");//Clears the description of previous input
-                ivPostImage.setImageResource(0);//"0" represents blank resource
+                ivPostImage.setImageResource(R.drawable.ic_image_placeholder_foreground);//"0" represents blank resource
+                isSaving = false;
             }
         });
     }

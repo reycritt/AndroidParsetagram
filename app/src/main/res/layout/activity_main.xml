@@ -8,6 +8,9 @@
     android:orientation="vertical"
     android:layout_margin="10dp">
 
+    <!--Added swipe refresh here-->
+
+
     <!--Represents a fragment-->
     <FrameLayout
         android:id="@+id/flContainer"
@@ -25,4 +28,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu_bottom_navigation" />
+    <!--</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 </RelativeLayout>

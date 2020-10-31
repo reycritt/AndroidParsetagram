@@ -29,6 +29,14 @@ public class ProfileFragment extends PostsFragment{
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
+    //Override private?
+
+
+    @Override
+    protected void refresh(View view) {
+        //This is here to avoid a crash from inheriting a null SwipeRefreshLayout
+    }
+
     @Override
     protected void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
